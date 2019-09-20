@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 80px;
+    background-image: url("../images/572066.jpg");
+}
+
+h3 {
+    margin: 5px 5px 13px;
+    text-transform: uppercase;
+    /* color: white; */
+    /* position: relative; */
+    bottom: 40px;
+}
+
+h1 {
+    margin: 5px 5px 13px;
+    text-transform: uppercase;
+    color: white;
+    text-align: center;
+    position: relative;
+    bottom: 40px;
+}
+
+.edition {
+    /* position: relative; */
+    left: 215px;
+}
+
+#enregistrer, #charge {
+   margin: 10px;
+}
+
+label, input {
+    display:block;
+}
+
+#divPrincipal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-radius: 15px ;
+}
+
+#canvas {
+    cursor: crosshair;
+    /* position: relative; */
+    bottom: 60px;
+}
+
+#selectedImage {
+    margin-bottom: 10px;
+    margin-left: 13px;
+    position: relative;
+    text-align: right;
+    color: white;
+    bottom: 25px;
+}
+
+#imagesDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    bottom: 35px;
+}
+
+#imageSauver {
+    width: 400px;
+    height: 400px;
+}
+
+#controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+fieldset {
+    padding: 25px;
+    background-color: white;
+    /* position: relative; */
+    /* left: 170px; */
+    border-radius: 50px;
+    margin-left: 20px;
+    margin-top: 50px;
+    bottom: 320px;
+}
+
+legend {
+    color: black;
+    text-transform: uppercase;
+    position: relative;
+    top: 18px;
+}
+
+.outils {
+  background-color: black;
+}
+
+#telecharger {
+    color: white;
+}
+
+#edition {
+    border-radius: 5px ;
+    width: 400px;
+    background-color: white;
+    /* color: #fff914; */
+    text-transform: uppercase;
+}
+
+#divCanvas {
+    margin: 100px;
+}
+
+canvas {
+    border-radius: 50px;
+    border : solid 1px;
+    margin-left: 100px;
+
+    cursor : url('lapizcursor.gif'), default;
+}
+
+.outil {
+    width: 100px;
+    /* position: relative; */
+    top: 150px
+}
+
+.outil div {
+    /* background: linear-gradient(to right, red 40%, yellow 30%, blue 65%); */
+    background : white;
+}
+
+.outil div:hover {
+    border: solid red 1px;
+}
+
+.outil img:hover {
+    border: solid red 1px;
+}

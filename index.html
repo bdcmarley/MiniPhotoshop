@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>PhotoWac</title>
+        <link rel="stylesheet" type="text/css" href="style/main.css">
+    </head>
+
+    <!-- Script crayon, gomme, taille de crayon, palette de couleur et téléchargement  -->
+    <script>
+        var color = "#000000";
+        var peinture = false;
+        // var taille = 10px;
+        // peinture
+        function peindre(event){
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            var taille = 10;
+            var x = event.clientX;
+            var y = event.clientY;
+            if(peinture){
+                ctx.fillStyle = color;
+                ctx.fillRect(x,y,taille, taille);
+            }
+        }
+
+        // peinture on
+        function on(){
+            peinture = true;
+        }
+
+        // peinture off
+        function off(){
+            peinture = false;
+        }
+
+        // gomme
+        function gomme(){
+            document.getElementById("canvas");
+            color = "#808080";
+            document.getElementById("colores").setAttribute("disabled", "");
+        }
+
+        // crayon
+        function crayon(){
+            document.getElementById("canvas");
+            color = document.getElementById("colores").value;
+            document.getElementById("colores").removeAttribute("disabled");
+        }
+
+        // palette de couleur
+        function scolor(){
+            color = document.getElementById("colores").value;
+        }
+
+        // taille de crayon
+        function staille(numero) {
+            taille = numero;
+        }
+
+        // Pouvoir télécharger notre canvas
+        function download(){
+            var canvas = document.getElementById("canvas");
+            var imagen = canvas.toDataURL("image/png");
+            this.href = imagen;
+        }
+
+        // position coordonnées x et y souris
+        function WhereMouse(evt){
+
+            evt = !evt ? event : evt
+
+            // position de la souris en utilisant les méthodes clientX et clientY quirepere les coordonnées en X et Y de la souris
+            var Mouse_X = evt.clientX;
+            var Mouse_Y = evt.clientY;
+
+            // ajout des positions, barre de scroll en horizontal et verticale
+            var scroll_x=document.body.scrollLeft || document.documentElement.scrollLeft;
+            var scroll_y=document.body.scrollTop || document.documentElement.scrollTop;
+
+            Mouse_X += scroll_x;
+            Mouse_Y += scroll_y;
+
+            document.getElementById('imp1').value=Mouse_X
+            document.getElementById('imp2').value=Mouse_Y
+        }
+        // ajout de l'evenement onmousemove afin de déclancher la fonction a chaque deplacement de la souris.
+        typeof window.addEventListener == 'undefined' ? document.attachEvent("onmousemove",WhereMouse) : document.addEventListener('mousemove',WhereMouse,false);
+
+    </script>
+
+    <body>
+        <header>
+            <div id="insert">
+                <h1>PHOTOBOB</h1>
+            </div>
+        </header>
+        <main>
+            <table>
+                <tr>
+                    <td class="outil">
+                        <h3 class="edition">Edition</h3>
+                        <a href="#" onclick="crayon();"><img src="./images/pen.png" width='50'></a>
+                        <a href="#" onclick="gomme();"><img src="./images/eraser.png" width='50'></a>
+
+                        <div style="width: 10px; height: 10px;" onclick="staille(10);" class="okcarree"></div><br />
+                        <div style="width: 20px; height: 20px;" onclick="staille(20);" class="okcarree"></div><br />
+                        <div style="width: 30px; height: 30px;" onclick="staille(30);" class="okcarree"></div><br />
+                        <div style="width: 40px; height: 40px;" onclick="staille(40);" class="okcarree"></div><br />
+
+                        <input type="color" id="colores" onchange="scolor();"/>
+                        <!-- position x et y -->
+                        <div  >
+                            X <input type =texte id='imp1'/>
+                            <br>
+                            <br>
+                            Y <input type =texte id='imp2'/>
+                        </div>
+
+                        <!-- edition photo -->
+                    </td>
+                    <td><canvas width="980" height="640" id="canvas" onmousemove="peindre(event);" onmousedown="on();" onmouseup="off();"></canvas></td>
+                    <td>
+                      <form action="">
+                          <fieldset>
+                              <legend>Effets</legend>
+                              <label for="opaciteRange">Opacité</label>
+                              <input type="range" id="opaciteRange" name="opacite" min="1" max="100.0" step="0.1" value="1.0">
+                              <label for="saturationRange">Saturation</label>
+                              <input type="range" id="saturationRange" name="opacite" min="1" max="100.0" step="3" value="1.0">
+                              <label for="blurRange"> Blur</label>
+                              <input type="range" id="blurRange" min="1" max="10.0" step="1.0" value="1.0">
+                              <label for="contrastRange">Contrast</label>
+                              <input type="range" id="contrastRange" min="1" max="200.0" step="1.0" value="1.0">
+                              <label for="hueRange">Hue-rotate</label>
+                              <input type="range" id="hueRange" min="1" max="100.0" step="1.0" value="1.0">
+                              <label for="ombreRange">Ombre</label>
+                              <input type="range" id="ombreRange" min="1" max="100.0" step="1.0" value="1.0">
+                          </fieldset>
+
+                          <!-- Dégradé de couleur -->
+                          <fieldset>
+                                  <legend>Scale</legend>
+                                  <label for="scaleSlider">Scale</label>
+                                  <input type="range" id="scaleSlider" min="1" max="10.0" step="0.1" value="1.0">
+                                  <button id="blackwhite">black white</button>
+                                  <button id="filterColor">Original</button>
+                                  <button id="negativeColor"> Negative Color</button>
+                          </fieldset>
+
+                      </form>
+                    </td>
+                </tr>
+            </table>
+            <input id="selectedImage" type="file"/>
+
+
+            <!-- Script DL -->
+            <script>
+                document.getElementById("telecharger").addEventListener("click", download, false);
+            </script>
+        </main>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+        <script src="script/main.js"></script>
+    </body>
+</html>
